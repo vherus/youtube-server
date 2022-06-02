@@ -1,4 +1,4 @@
-import { Application, Request, Response } from "express";
+import { Application } from "express";
 import IRouter from "./IRouter";
 import { API_URL } from "../Config/Config";
 import DefaultController from "../Controllers/DefaultController";
