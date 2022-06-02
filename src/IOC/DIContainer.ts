@@ -1,10 +1,12 @@
-import express, { Application } from "express";
+import express, { Application } from "express"
 import cors from 'cors'
-import Server from "../Core/Server";
-import DefaultRouter from "../Routing/DefaultRouter";
-import IRouter from "../Routing/IRouter";
-import { PORT } from "../Config/Config";
-import DefaultController from "../Controllers/DefaultController";
+import Server from "../Core/Server"
+import DefaultRouter from "../Routing/DefaultRouter"
+import IRouter from "../Routing/IRouter"
+import { PORT } from "../Config/Config"
+import DefaultController from "../Controllers/DefaultController"
+import VideoRouter from "../Routing/Video/VideoRouter"
+import VideoController from "../Controllers/Video/VideoController"
 
 export default class DIContainer {
     private app
@@ -14,9 +16,9 @@ export default class DIContainer {
 
         this.app.use(cors({
             origin: `http://localhost:${PORT}`
-        }));
-        this.app.use(express.urlencoded({ extended: false }));
-        this.app.use(express.json());
+        }))
+        this.app.use(express.urlencoded({ extended: false }))
+        this.app.use(express.json())
     }
 
     get Server(): Server {
@@ -25,7 +27,8 @@ export default class DIContainer {
 
     private get Routers(): IRouter[] {
         return [
-            new DefaultRouter(this.app, new DefaultController)
+            new DefaultRouter(this.app, new DefaultController),
+            new VideoRouter(this.app, new VideoController)
         ]
     }
 }

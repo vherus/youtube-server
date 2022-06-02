@@ -1,6 +1,6 @@
-import { Application } from "express";
-import IRouter from "../Routing/IRouter";
-import { PORT } from "../Config/Config";
+import { Application } from "express"
+import IRouter from "../Routing/IRouter"
+import { PORT } from "../Config/Config"
 
 export default class Server {
     private app

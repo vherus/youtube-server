@@ -1,7 +1,7 @@
-import { Application } from "express";
-import IRouter from "./IRouter";
-import { API_URL } from "../Config/Config";
-import DefaultController from "../Controllers/DefaultController";
+import { Application } from "express"
+import IRouter from "./IRouter"
+import { API_URL } from "../Config/Config"
+import DefaultController from "../Controllers/DefaultController"
 
 export default class DefaultRouter implements IRouter {
     private app
@@ -13,6 +13,6 @@ export default class DefaultRouter implements IRouter {
     }
 
     initialise(): void {
-        this.app.get(API_URL, this.controller.get);
+        this.app.get(API_URL, this.controller.get)
     }
 }
