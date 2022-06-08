@@ -1,3 +1,3 @@
-export default interface IWriter {
-    create<T>(entity: T): T
+export default interface IWriter<RawEntity, DatabaseEntity> {
+    create(entity: RawEntity): Promise<DatabaseEntity>
 }

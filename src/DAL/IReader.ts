@@ -1,3 +1,3 @@
-export default interface IReader {
-    getById<T>(id: number | string): T
+export default interface IReader<DatabaseEntity> {
+    getById(id: number | string): Promise<DatabaseEntity>
 }
