@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+    id              Int         @id @default(autoincrement())
+    createdAt       DateTime    @default(now())
+    updatedAt       DateTime    @updatedAt
+    username        String      @unique
+    passwordHash    String
+    videos          Video[]
+    videoViews      VideoView[]
+}
+
+model Video {
+    id              String      @id @default(uuid())
+    createdAt       DateTime    @default(now())
+    filename        String
+    thumbnail       String
+    title           String
+    runtime         Int
+    publishedAt     DateTime?
+    author          User        @relation(fields: [authorId], references: [id])
+    authorId        Int
+    views           VideoView[]
+}
+
+model VideoView {
+    user            User        @relation(fields: [userId], references: [id])
+    userId          Int
+    video           Video       @relation(fields: [videoId], references: [id])
+    videoId         String
+    createdAt       DateTime    @default(now())
+
+    @@id([userId, videoId])
+}
