@@ -1,4 +1,7 @@
 export default interface IUser {
-    username: string,
+    id: number
+    createdAt: Date
+    updatedAt: Date
+    username: string
     passwordHash: string
 }
