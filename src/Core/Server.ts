@@ -12,7 +12,7 @@ export default class Server {
     }
 
     public start(): void {
-        this.routers.forEach(router => router.initialise())
+        this.routers.forEach(router => router.initialise(this.app))
         this.app.listen(PORT, () => console.log(`API server listening on port ${PORT}`))
     }
 }

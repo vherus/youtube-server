@@ -1,3 +1,5 @@
+import { Application } from "express"
+
 export default interface IRouter {
-    initialise(): void
+    initialise(app: Application): void
 }

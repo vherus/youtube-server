@@ -4,15 +4,13 @@ import { API_URL } from "../../Config/Config"
 import VideoController from "../../Controllers/Video/VideoController"
 
 export default class VideoRouter implements IRouter {
-    private app
     private controller
 
-    constructor(app: Application, controller: VideoController) {
-        this.app = app
+    constructor(controller: VideoController) {
         this.controller = controller
     }
 
-    initialise(): void {
-        this.app.get(`${API_URL}/video-test`, this.controller.get)
+    initialise(app: Application): void {
+        app.get(`${API_URL}/video-test`, this.controller.get)
     }
 }

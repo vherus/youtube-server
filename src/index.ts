@@ -6,6 +6,9 @@ import DefaultRouter from './Routing/DefaultRouter'
 import DefaultController from './Controllers/DefaultController'
 import VideoRouter from './Routing/Video/VideoRouter'
 import VideoController from './Controllers/Video/VideoController'
+import UserRouter from './Routing/User/UserRouter'
+import UserController from './Controllers/User/UserController'
+import Writer from './DAL/User/Writer'
 
 const app = express()
 
@@ -17,8 +20,9 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 const routers = [
-    new DefaultRouter(app, new DefaultController),
-    new VideoRouter(app, new VideoController)
+    new DefaultRouter(new DefaultController),
+    new VideoRouter(new VideoController),
+    new UserRouter(new UserController(new Writer))
 ]
 
 const server = new Server(app, routers)

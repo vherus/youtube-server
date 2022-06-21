@@ -8,7 +8,7 @@ export default class Writer implements IWriter<IRawUser, IUser> {
         const createdUser = await dbClient.user.create({
             data: {
                 username: entity.username,
-                passwordHash: entity.passwordHash
+                passwordHash: entity.password
             }
         })
 
