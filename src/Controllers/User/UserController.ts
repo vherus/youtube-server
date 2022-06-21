@@ -1,21 +1,25 @@
 import { Request, Response } from "express";
-import IWriter from "../../DAL/IWriter";
+import CommandBus from "../../CommandBus/CommandBus";
+import CreateUser from "../../CommandBus/Commands/User/CreateUser";
 import IRawUser from "../../DAL/User/IRawUser";
 import IUser from "../../DAL/User/IUser";
 
 export default class UserController {
-    private writer
+    private commandBus
 
-    constructor(writer: IWriter<IRawUser, IUser>) {
-        this.writer = writer
+    constructor(commandBus: CommandBus) {
+        this.commandBus = commandBus
     }
 
-    public post(req: Request, res: Response): void {
+    public async post(req: Request, res: Response): Promise<void> {
         const rawUser: IRawUser = req.body
 
-        // TODO hash password, create & send token
-        // TODO error handling
+        const user = await this.commandBus.dispatch<IUser>(new CreateUser(rawUser))
 
-        res.json({ data: rawUser });
+        delete user.passwordHash
+
+        // TODO error handling, validation, JWT
+
+        res.json({ data: user });
     }
 }

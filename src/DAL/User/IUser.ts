@@ -3,5 +3,5 @@ export default interface IUser {
     createdAt: Date
     updatedAt: Date
     username: string
-    passwordHash: string
+    passwordHash: string | undefined
 }

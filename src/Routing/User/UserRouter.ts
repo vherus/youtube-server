@@ -1,4 +1,4 @@
-import { Application } from "express"
+import { Application, Request, Response } from "express"
 import UserController from "../../Controllers/User/UserController"
 import IRouter from "../IRouter"
 import { API_URL } from "../../Config/Config"
@@ -11,6 +11,6 @@ export default class UserRouter implements IRouter {
     }
 
     initialise(app: Application): void {
-        app.post(`${API_URL}/user`, this.controller.post)
+        app.post(`${API_URL}/user`, this.controller.post.bind(this.controller))
     }
 }
