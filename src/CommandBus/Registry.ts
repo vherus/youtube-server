@@ -9,6 +9,7 @@ export default class Registry {
     }
 
     resolve(command: Command): Handler {
+        // Looking back, I'm not happy with O(n). I'd refactor the mappings into a Map, construct it in the constructor, then use the O(1) methods on the Map
         const resolved = this.mappings.find(mapping => mapping[0] === command.name)
 
         if (!resolved) {
